@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://d-mysql.dmsd.tech:3306/integral_zentao_dev?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: jifen
+    password: jifen
+
+# 端口
+server:
+  port: 8080
+
+application:
+    name: tfjy-dtc-zentao-service # 服务名称
+
+# mapper包扫描路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+# Sql 日志信息
+logging:
+  level:
+    com.dmsd.omo.xxt.mapper: DEBUG
