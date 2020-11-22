@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tjfybj.dtc.zentao.mapper.TaskMapper">
     <select id="task" resultType="com.tfjybj.dtc.commons.model.TaskModel">
---         SELECT tu.user_name as user_name,tzr.description as description
---         FROM tik_user tu, tiz_zentao_result tzr
---         WHERE tu.id = tzr.user_id
---         AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) = date(tzr.update_time)
+        SELECT tu.user_name as user_name,tzr.description as description
+        FROM tik_user tu, tiz_zentao_result tzr
+        WHERE tu.id = tzr.user_id
+        AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) = date(tzr.update_time)
     </select>
 </mapper>
