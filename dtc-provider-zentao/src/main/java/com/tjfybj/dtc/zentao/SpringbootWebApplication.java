@@ -14,7 +14,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @UpdateDate
  * @UpdateRemark
  */
-@EnableCaching
 @EnableSwagger2
 @SpringBootApplication
 public class SpringbootWebApplication {

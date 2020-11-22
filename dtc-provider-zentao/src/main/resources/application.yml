@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://d-mysql.dmsd.tech:3306/integral_zentao_dev?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://mysql.dmsd.tech:3306/integral_zentao_prod?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
     username: jifen
     password: jifen
 

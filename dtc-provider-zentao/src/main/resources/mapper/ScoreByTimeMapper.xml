@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tjfybj.dtc.zentao.mapper.ScoreByTimeMapper">
+    <select id="queryScoreByTime" resultType="com.tfjybj.dtc.commons.model.ScoreByTimeModel">
+        select userByProject.id,userByProject.userName,userByProject.projectId,userByProject.projectName,sum(tzr.result)
+        as score
+        from tiz_zentao_result tzr,
+        (
+        select DISTINCT tu.id as id,tu.user_name as userName,zp.id as projectId,zp.`name` as projectName
+        from zt_project zp,zt_action za
+        join tiz_zentao_integral_user tziu
+        on tziu.account = za.actor
+        join tik_user tu
+        on tziu.user_id = tu.id
+        where zp.id = za.project
+        and (zp.id=#{projectId})
+        and za.objectType = 'task'
+        ) as userByProject
+        where userByProject.id = tzr.user_id
+        and DATE_SUB( CURDATE(), INTERVAL 30 DAY )&lt;= date( tzr.create_time )
+        group by userByProject.id
+        order by projectId
+    </select>
+</mapper>
+
+
