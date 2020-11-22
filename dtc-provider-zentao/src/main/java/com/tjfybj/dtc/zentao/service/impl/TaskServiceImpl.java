@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,40 +95,3 @@ public class TaskServiceImpl implements TaskService {
         return resultModelList;
     }
 }
-
-
-//          if (task.getStatus().trim() == "wait") {
-//                resultModel.setId(makeIdUtil.nextId());
-//                resultModel.setName(task.getOpenedBy());
-//                resultModel.setStatus("创建");
-//                resultModel.setTask(task.getName());
-//                resultModel.setUpdateTime(task.getOpenedDate());
-//            } else if (task.getStatus().trim() == "doing") {
-//                resultModel.setId(makeIdUtil.nextId());
-//                resultModel.setName(task.getOpenedBy());
-//                resultModel.setStatus("开启");
-//                resultModel.setTask(task.getName());
-//                resultModel.setUpdateTime(task.getRealStarted());
-//            } else if (task.getStatus().trim() == "done") {
-//                resultModel.setId(makeIdUtil.nextId());
-//                resultModel.setName(task.getFinishedBy());
-//                resultModel.setStatus("完成");
-//                resultModel.setTask(task.getName());
-//                resultModel.setUpdateTime(task.getFinishedDate());
-//            } else if (task.getStatus().trim() == "cancel") {
-//                resultModel.setId(makeIdUtil.nextId());
-//                resultModel.setName(task.getCanceledBy());
-//                resultModel.setStatus("取消");
-//                resultModel.setTask(task.getName());
-////                Date d1= formatter.parse(task.getCanceledDate());
-//                resultModel.setUpdateTime(task.getCanceledDate());
-//            } else if (task.getStatus().trim() == "closed") {
-//                resultModel.setId(makeIdUtil.nextId());
-//                //操作人
-//                resultModel.setName(task.getClosedBy());
-//                resultModel.setStatus("关闭");
-//                resultModel.setTask(task.getName());
-//                resultModel.setUpdateTime(task.getClosedDate());
-////            }
-//                resultModelList.add(resultModel);
-//            }

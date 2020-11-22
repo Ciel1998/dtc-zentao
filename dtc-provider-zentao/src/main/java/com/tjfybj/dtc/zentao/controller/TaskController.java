@@ -2,7 +2,6 @@ package com.tjfybj.dtc.zentao.controller;
 
 import com.tfjybj.dtc.commons.bo.CommonResult;
 import com.tfjybj.dtc.commons.model.ResultModel;
-import com.tfjybj.dtc.commons.model.TaskModel;
 import com.tjfybj.dtc.zentao.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,9 +35,6 @@ public class TaskController {
     @GetMapping("/task")
     @ApiOperation("获取任务列表最新几条数据")
     public CommonResult practice(@RequestParam(value = "beginDate") String beginDate,@RequestParam(value = "endDate") String endDate) throws ParseException {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date bDate = sdf.parse(beginDate);
-//        Date eDate = sdf.parse(endDate);
         List<ResultModel> stringList = taskService.task(beginDate , endDate);
         if (stringList.size() > 0) {
             return CommonResult.success("success",stringList);

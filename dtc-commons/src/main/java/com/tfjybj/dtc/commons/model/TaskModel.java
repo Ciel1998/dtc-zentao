@@ -19,6 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskModel {
+    //http://zentao.dmsd.tech/zentao/dev-db-zt_task.html 字段详解
     //任务名
     private String name;
     private String status;

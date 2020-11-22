@@ -7,7 +7,7 @@ spring:
 
 # 端口
 server:
-  port: 8080
+  port: 9001
 
 application:
     name: tfjy-dtc-zentao-service # 服务名称
