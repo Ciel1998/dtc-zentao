@@ -2,9 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tjfybj.dtc.zentao.mapper.TaskMapper">
     <select id="task" resultType="com.tfjybj.dtc.commons.model.TaskModel">
-        SELECT tu.user_name as user_name,tzr.description as description
-        FROM tik_user tu, tiz_zentao_result tzr
-        WHERE tu.id = tzr.user_id
-        AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) = date(tzr.update_time)
+		SELECT
+			`name` AS name,
+			`status` AS STATUS,
+			openedBy AS openedBy,
+			openedDate AS openedDate,
+			realStarted AS realStarted,
+			finishedBy AS finishedBy,
+			finishedDate AS finishedDate,
+			canceledBy AS canceledBy,
+			canceledDate AS canceledDate,
+			closedBy AS closedBy,
+			closedDate AS closedDate
+		FROM
+			zt_task
+		WHERE
+            zt_task.openedDate BETWEEN #{beginDate} AND #{endDate}
     </select>
+    <!--从数据库中查询中文名-->
+    <select id="selectUserName" resultType="java.lang.String">
+		SELECT
+			realname
+		FROM
+			zt_user
+		WHERE
+		account = #{englishName}
+	</select>
 </mapper>

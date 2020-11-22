@@ -1,8 +1,8 @@
 package com.tjfybj.dtc.zentao.service;
 
-import com.tfjybj.dtc.commons.model.TaskModel;
+import com.tfjybj.dtc.commons.model.ResultModel;
 
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -15,5 +15,5 @@ import java.util.List;
  * @UpdateRemark
  */
 public interface TaskService {
-    List<TaskModel> task();
+    List<ResultModel> task(String beginDate , String endDate) throws ParseException;
 }

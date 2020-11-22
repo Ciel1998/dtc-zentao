@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @version 1.0
  * @Description
@@ -17,8 +19,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskModel {
-//    private Long id;
-    private String user_name;
-    private String description;
-//    private DateTime createTime;
+    //任务名
+    private String name;
+    private String status;
+    private String openedBy;
+    private String openedDate;
+    private String realStarted;
+    private String finishedBy;
+    private String finishedDate;
+    private String canceledBy;
+    private String canceledDate;
+    private String closedBy;
+    private String closedDate;
 }

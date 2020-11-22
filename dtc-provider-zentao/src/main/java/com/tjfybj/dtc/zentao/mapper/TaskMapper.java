@@ -3,6 +3,7 @@ package com.tjfybj.dtc.zentao.mapper;
 import com.tfjybj.dtc.commons.model.TaskModel;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,5 +17,7 @@ import java.util.List;
  */
 @Mapper
 public interface TaskMapper {
-    List<TaskModel> task();
+    List<TaskModel> task(String beginDate , String endDate);
+    //从数据库中，查询中文名
+    String selectUserName(String englishName);
 }
