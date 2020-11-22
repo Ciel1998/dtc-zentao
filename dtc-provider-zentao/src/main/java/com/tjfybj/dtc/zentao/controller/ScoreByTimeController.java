@@ -33,12 +33,21 @@ public class ScoreByTimeController {
 
     @ApiOperation("查询一段时间内个人禅道积分汇总")
     @GetMapping("/queryScoreByTime")
-    public CommonResult queryScoreByTime(@RequestParam("projectId") Integer projectId, @RequestParam(value = "days") Integer days) {
-        List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeService.queryScoreByTime(projectId,days);
-        if (CollectionUtils.isEmpty(scoreByTimeModelList)) {
-            return CommonResult.build(CommonResult.RESULE_DATA_NONE, "查询为空");
+    public CommonResult queryScoreByTime(@RequestParam(value = "projectId", required = false) Integer projectId, @RequestParam(value = "days") Integer days) {
+        if (projectId == null) {
+            List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeService.queryScoreByTime(days);
+            if (CollectionUtils.isEmpty(scoreByTimeModelList)) {
+                return CommonResult.build(CommonResult.RESULE_DATA_NONE, "查询为空");
+            } else {
+                return CommonResult.build(CommonResult.SUCCESS, "查询成功", scoreByTimeModelList);
+            }
         } else {
-            return CommonResult.build(CommonResult.SUCCESS, "查询成功", scoreByTimeModelList);
+            List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeService.queryScoreByProAndTime(projectId, days);
+            if (CollectionUtils.isEmpty(scoreByTimeModelList)) {
+                return CommonResult.build(CommonResult.RESULE_DATA_NONE, "查询为空");
+            } else {
+                return CommonResult.build(CommonResult.SUCCESS, "查询成功", scoreByTimeModelList);
+            }
         }
     }
 }

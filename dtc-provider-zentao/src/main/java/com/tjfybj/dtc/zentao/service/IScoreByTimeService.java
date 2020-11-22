@@ -15,5 +15,7 @@ import java.util.List;
  */
 public interface IScoreByTimeService {
 
-    List<ScoreByTimeModel> queryScoreByTime(Integer projectId,Integer days);
+    List<ScoreByTimeModel> queryScoreByTime(Integer days);
+
+    List<ScoreByTimeModel> queryScoreByProAndTime(Integer projectId,Integer days);
 }

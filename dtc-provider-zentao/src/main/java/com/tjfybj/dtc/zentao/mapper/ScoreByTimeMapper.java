@@ -16,5 +16,7 @@ import java.util.List;
  */
 @Mapper
 public interface ScoreByTimeMapper {
-    List<ScoreByTimeModel> queryScoreByTime(Integer projectId,Integer days);
+    List<ScoreByTimeModel> queryScoreByProAndTime(Integer projectId,Integer days);
+
+    List<ScoreByTimeModel> queryScoreByTime(Integer days);
 }

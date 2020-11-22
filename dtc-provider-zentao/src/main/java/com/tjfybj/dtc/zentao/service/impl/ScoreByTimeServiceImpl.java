@@ -24,8 +24,14 @@ public class ScoreByTimeServiceImpl implements IScoreByTimeService {
     private ScoreByTimeMapper scoreByTimeMapper;
 
     @Override
-    public List<ScoreByTimeModel> queryScoreByTime(Integer projectId,Integer days) {
-        List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeMapper.queryScoreByTime(projectId,days);
+    public List<ScoreByTimeModel> queryScoreByTime(Integer days) {
+        List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeMapper.queryScoreByTime(days);
+        return scoreByTimeModelList;
+    }
+
+    @Override
+    public List<ScoreByTimeModel> queryScoreByProAndTime(Integer projectId, Integer days) {
+        List<ScoreByTimeModel> scoreByTimeModelList = scoreByTimeMapper.queryScoreByProAndTime(projectId, days);
         return scoreByTimeModelList;
     }
 }
