@@ -1,12 +1,14 @@
 package com.tjfybj.dtc.zentao.controller;
 
 import com.tfjybj.dtc.commons.bo.CommonResult;
+import com.tfjybj.dtc.commons.model.TaskModel;
 import com.tjfybj.dtc.zentao.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -32,10 +34,11 @@ public class TaskController {
     @GetMapping("/task")
     @ApiOperation("获取任务列表")
     public CommonResult practice() {
-        Integer integer = taskService.task();
-        if (integer > 0) {
-            return CommonResult.success("success");
+        List<TaskModel> stringList = taskService.task();
+        if (stringList.size() > 0) {
+            return CommonResult.success("success",stringList);
+        } else {
+            return CommonResult.build(CommonResult.RESULE_DATA_NONE, "查询为空~~~~");
         }
-        return CommonResult.build(CommonResult.RESULE_DATA_NONE, "查询为空");
     }
 }

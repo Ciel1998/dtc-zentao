@@ -1,6 +1,9 @@
 package com.tjfybj.dtc.zentao.service;
 
+import com.tfjybj.dtc.commons.model.TaskModel;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -12,5 +15,5 @@ import java.util.Date;
  * @UpdateRemark
  */
 public interface TaskService {
-    Integer task();
+    List<TaskModel> task();
 }

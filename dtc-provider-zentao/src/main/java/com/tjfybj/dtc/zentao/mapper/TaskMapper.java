@@ -1,6 +1,9 @@
 package com.tjfybj.dtc.zentao.mapper;
 
+import com.tfjybj.dtc.commons.model.TaskModel;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @version 1.0
@@ -13,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TaskMapper {
-    Integer task();
+    List<TaskModel> task();
 }
