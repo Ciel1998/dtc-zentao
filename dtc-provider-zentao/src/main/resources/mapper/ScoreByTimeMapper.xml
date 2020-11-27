@@ -3,10 +3,10 @@
 <mapper namespace="com.tjfybj.dtc.zentao.mapper.ScoreByTimeMapper">
     <select id="queryScoreByProAndTime" resultType="com.tfjybj.dtc.commons.model.ScoreByTimeModel">
         SELECT
-        userByProject.id,
-        userByProject.userName,
-        userByProject.projectId,
-        userByProject.projectName,
+        userByProject.id AS id,
+        userByProject.userName AS userName,
+        userByProject.projectId AS projectId,
+        userByProject.projectName AS projectName,
         sum( tzr.result ) AS score
         FROM
         tiz_zentao_result tzr,
@@ -15,20 +15,30 @@
         tu.id AS id,
         tu.user_name AS userName,
         zp.id AS projectId,
-        zp.`name` AS projectName
+        zp.`name` AS projectName,
+        team.role AS role
         FROM
         zt_project zp,
-        zt_action za
-        JOIN tiz_zentao_integral_user tziu ON tziu.account = za.actor
+        (
+        SELECT
+        zt.account AS account,
+        zt.root AS root,
+        zt.role AS role
+        FROM
+        zt_team zt
+        JOIN zt_project zp ON zp.id = zt.root
+        ) AS team
+        JOIN tiz_zentao_integral_user tziu ON tziu.account = team.account
         JOIN tik_user tu ON tziu.user_id = tu.id
         WHERE
-        zp.id = za.project
-        and (zp.id=#{projectId})
-        AND za.objectType = 'task'
+        zp.id = team.root
+        AND zp.id = #{projectId}
         ) AS userByProject
         WHERE
         userByProject.id = tzr.user_id
-        AND DATE_SUB( CURDATE(), INTERVAL 30 DAY )&lt;= date( tzr.create_time )
+        AND DATE_SUB( CURDATE(), INTERVAL #{days} DAY )&lt;= date( tzr.create_time )
+        AND userByProject.role NOT LIKE '%测试%'
+        AND userByProject.role NOT LIKE '%运维%'
         GROUP BY
         userByProject.id
         ORDER BY
@@ -36,24 +46,47 @@
     </select>
 
     <select id="queryScoreByTime" resultType="com.tfjybj.dtc.commons.model.ScoreByTimeModel">
-        select userByProject.id,userByProject.userName,userByProject.projectId,userByProject.projectName,sum(tzr.result)
-        as score
-        from tiz_zentao_result tzr,
+        SELECT
+        userByProject.id AS id,
+        userByProject.userName AS userName,
+        userByProject.projectId AS projectId,
+        userByProject.projectName AS projectName,
+        sum( tzr.result ) AS score
+        FROM
+        tiz_zentao_result tzr,
         (
-        select DISTINCT tu.id as id,tu.user_name as userName,zp.id as projectId,zp.`name` as projectName
-        from zt_project zp,zt_action za
-        join tiz_zentao_integral_user tziu
-        on tziu.account = za.actor
-        join tik_user tu
-        on tziu.user_id = tu.id
-        where zp.id = za.project
-        AND (zp.id = 35 OR zp.id = 37 OR zp.id = 38 OR zp.id = 47 )
-        and za.objectType = 'task'
-        ) as userByProject
-        where userByProject.id = tzr.user_id
-        and DATE_SUB( CURDATE(), INTERVAL 30 DAY )&lt;= date( tzr.create_time )
-        group by userByProject.id
-        order by projectId
+        SELECT DISTINCT
+        tu.id AS id,
+        tu.user_name AS userName,
+        zp.id AS projectId,
+        zp.`name` AS projectName,
+        team.role AS role
+        FROM
+        zt_project zp,
+        (
+        SELECT
+        zt.account AS account,
+        zt.root AS root,
+        zt.role AS role
+        FROM
+        zt_team zt
+        JOIN zt_project zp ON zp.id = zt.root
+        ) AS team
+        JOIN tiz_zentao_integral_user tziu ON tziu.account = team.account
+        JOIN tik_user tu ON tziu.user_id = tu.id
+        WHERE
+        zp.id = team.root
+        AND ( zp.id = 35 OR zp.id = 37 OR zp.id = 38 OR zp.id = 47 )
+        ) AS userByProject
+        WHERE
+        userByProject.id = tzr.user_id
+        AND DATE_SUB( CURDATE(), INTERVAL #{days} DAY )&lt;= date( tzr.create_time )
+        AND userByProject.role NOT LIKE '%测试%'
+        AND userByProject.role NOT LIKE '%运维%'
+        GROUP BY
+        userByProject.id
+        ORDER BY
+        projectId
     </select>
 </mapper>
 
