@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Mapper
 public interface TaskMapper {
+    //根据时间，查询任务详情
     List<TaskModel> task(String beginDate , String endDate);
     //从数据库中，查询中文名
     String selectUserName(String englishName);

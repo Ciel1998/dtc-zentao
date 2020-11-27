@@ -22,7 +22,7 @@ public class ZentaoConstant {
     /**
      * 创建任务
      */
-    public static final String TASK_OPEN = "opened";
+    public static final String TASK_OPEN = "wait";
 
     /**
      * 开始任务

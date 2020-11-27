@@ -25,6 +25,8 @@ public class TaskModel {
     private String status;
     private String openedBy;
     private String openedDate;
+    //指派人和实际开始人
+    private String assignedTo;
     private String realStarted;
     private String finishedBy;
     private String finishedDate;

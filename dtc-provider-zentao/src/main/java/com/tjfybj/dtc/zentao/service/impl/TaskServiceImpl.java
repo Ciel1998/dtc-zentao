@@ -34,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
      **/
     @Override
     public List<ResultModel> task(String beginDate, String endDate) throws ParseException {
+        //根据时间，查询任务详情
         List<TaskModel> taskList = taskMapper.task(beginDate, endDate);
         List<ResultModel> resultModelList = new ArrayList<>();
         for (TaskModel task : taskList) {
@@ -51,9 +52,9 @@ public class TaskServiceImpl implements TaskService {
                     break;
                 case ZentaoConstant.TASK_START:
                     resultModel.setId(makeIdUtil.nextId());
-                    //从数据库中查询中文名称
-                    String getOpenedBy = taskMapper.selectUserName(task.getOpenedBy());
-                    resultModel.setName(getOpenedBy);
+                    //从数据库中查询中文名称assignedTo
+                    String assignedTo = taskMapper.selectUserName(task.getAssignedTo());
+                    resultModel.setName(assignedTo);
                     resultModel.setStatus("开启");
                     resultModel.setTask(task.getName());
                     resultModel.setUpdateTime(task.getRealStarted());
