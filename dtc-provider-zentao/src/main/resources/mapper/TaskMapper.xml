@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tjfybj.dtc.zentao.mapper.TaskMapper">
+	<!--根据时间，查询任务详情-->
+	<select id="task" resultType="com.tfjybj.dtc.commons.model.TaskModel">
+		SELECT
+			`name` AS name,
+			`status` AS STATUS,
+			openedBy AS openedBy,
+			openedDate AS openedDate,
+			assignedTo AS assignedTo,
+			realStarted AS realStarted,
+			finishedBy AS finishedBy,
+			finishedDate AS finishedDate,
+			canceledBy AS canceledBy,
+			canceledDate AS canceledDate,
+			closedBy AS closedBy,
+			closedDate AS closedDate
+		FROM
+			zt_task
+		WHERE
+            zt_task.openedDate BETWEEN #{beginDate} AND #{endDate}
+    </select>
+    <!--从数据库中查询中文名-->
+    <select id="selectUserName" resultType="java.lang.String">
+		SELECT
+			realname
+		FROM
+			zt_user
+		WHERE
+		account = #{englishName}
+	</select>
+</mapper>
